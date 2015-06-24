@@ -1,0 +1,40 @@
+{% extends "admintest/base.html" %}
+
+{#{% block main %}#}
+{#  <br>#}
+{#<br>#}
+{#<br>#}
+{#<br>#}
+{#<br>#}
+{#  <h2>Register</h2>#}
+{#  #}
+{#  {% for field in form %}#}
+{#    {{field.error}}#}
+{##}
+{#  {% endfor %}#}
+{#  #}
+{#  <form action="/accounts/register/" method="post">{% csrf_token %}#}
+{#  {{form}}#}
+{#  #}
+{#  #}
+{#  #}
+{#  <input type="submit" value="Register" />#}
+{#    #}
+{#  </form>#}
+{#  #}
+{#{% endblock %}#}
+
+{#----------------------------------------------------------------------------------------------------------------------------#}
+{#trying email verification#}
+{#-------------------------------------------------------------------------------------------------------------------------------#}
+
+
+{% block main %}
+  <br>
+<br>
+<br>
+<br>
+<br>
+<h1>Confirmation link has Expired<br>Try registering Again</h1>
+
+{% endblock %}

@@ -105,3 +105,18 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
+#
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'suhas.jadhav@consultadd.in'
+# EMAIL_HOST_PASSWORD = 'YOURPASSWORD'
+# EMAIL_PORT = 587
+# --------------------------------------------------------------------------
+# trying email verification system
+# -----------------------------------------------------------------------------
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'suhas.jadhav@consultadd.in'
+EMAIL_HOST_PASSWORD = 'myid@2138'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'nmyname@gmail.com'

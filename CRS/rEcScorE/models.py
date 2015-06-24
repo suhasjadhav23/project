@@ -28,9 +28,43 @@ class Choice(models.Model):
     def __unicode__(self):  # __unicode__ on Python 2
         return self.choice_text
 
+
 STATUS_CHOICES = enumerate(("solid", "squishy", "liquid"))
+
+
 class IceCream(models.Model):
-      flavor = models.CharField(max_length=50)
-      status = models.IntegerField(choices=STATUS_CHOICES)
-      def __unicode__(self):  # __unicode__ on Python 2
+    flavor = models.CharField(max_length=50)
+    status = models.IntegerField(choices=STATUS_CHOICES)
+
+    def __unicode__(self):  # __unicode__ on Python 2
         return self.flavor
+
+
+# Comment model
+
+class Comment(models.Model):
+    first_name = models.CharField(max_length=200)
+    second_name = models.CharField(max_length=200)
+    body = models.TextField()
+    pub_date = models.DateTimeField('date published')
+
+
+    def __unicode__(self):  # __unicode__ on Python 2
+        return self.first_name
+
+        # userprofile model
+
+
+from django.contrib.auth.models import User
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    activation_key = models.CharField(max_length=40, blank=True)
+    key_expires = models.DateTimeField(default=datetime.date.today())
+
+    def __unicode__(self):
+        return self.user.username
+
+    class Meta:
+        verbose_name_plural = u'User profiles'

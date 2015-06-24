@@ -6,7 +6,7 @@ from django.contrib import admin
 
 from django.contrib import admin
 
-from .models import Choice, Question, IceCream
+from .models import Choice, Question, IceCream, Comment, UserProfile
 
 # #by changing the place of class below we can decide what to keep first and what to keep next
 # class QuestionAdmin(admin.ModelAdmin):
@@ -38,7 +38,15 @@ class QuestionAdmin(admin.ModelAdmin):
     list_filter = ['pub_date']
     search_fields = ['question_text']
 
+# ----------------------------------------------------------------------------------
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['__unicode__', 'body','pub_date']
+
+# class UserProfileAdmin(admin.ModelAdmin):
+#     list_display = ['__unicode__','pub_date']
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
 admin.site.register(IceCream)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(UserProfile)
