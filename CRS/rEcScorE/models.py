@@ -80,11 +80,11 @@ class UserProfile(models.Model):
 class Employee(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
     your_name = models.CharField(max_length=100, default=None)
-    dob = models.DateTimeField('Date Of Birth ', blank=True, null=True)
+    dob = models.DateTimeField(blank=True, null=True)
     city = models.CharField(max_length=50, default=None)
     country = models.CharField(max_length=50, default=None)
     highest_degree = models.CharField(max_length=100, default=None)
-    doj = models.DateTimeField('Date Of Joining ', blank=True, null=True)
+    doj = models.DateTimeField(blank=True, null=True)
     designation = models.CharField(max_length=100, default=None)
     # NT_skill = models.CharField(max_length=500, default=None, widget=forms.Textarea)
     # T_skill = models.CharField(max_length=500, default=None)

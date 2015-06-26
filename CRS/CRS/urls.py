@@ -19,8 +19,10 @@ urlpatterns = [
     url(r'^accounts/sign_up/', 'rEcScorE.views.register_user'),
     url(r'^accounts/register_success/$', 'rEcScorE.views.register_success'),
     url(r'^accounts/confirm/(?P<activation_key>\w+)/','rEcScorE.views.register_confirm'),
-    url(r'^userprofile/userinfo/$', 'rEcScorE.views.get_empprof'),
-    url(r'^userprofile/myprofile/$', 'rEcScorE.views.myprofile')
+    url(r'^userprofile/userinfo/(?P<userid>\d+)/$', 'rEcScorE.views.get_empprof'),
+    url(r'^userprofile/myprofile/$', 'rEcScorE.views.myprofile'),
+    url(r'^userprofile/editprofile/$', 'rEcScorE.views.editprofile'),
+
 
 ]
 

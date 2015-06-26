@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from .models import Choice, Question
-
+from annoying.functions import get_object_or_None
 
 class indexView(TemplateView):
     template_name = 'rEcScorE/index.html'
@@ -143,7 +143,7 @@ from django.template import RequestContext
 from django.core.mail import send_mail
 import hashlib, datetime, random
 from django.utils import timezone
-
+from .forms import*
 
 def login(request):
     c = {}
@@ -159,7 +159,8 @@ def auth_view(request):
 
     if user is not None and (user.is_active is True):
         auth.login(request, user)
-        return HttpResponseRedirect('/userprofile/userinfo')
+        userid = user.id
+        return HttpResponseRedirect('/userprofile/userinfo/%d'%userid)
     else:
         return HttpResponseRedirect('/accounts/invalid')
 
@@ -248,29 +249,45 @@ def register_confirm(request, activation_key):
 # --------------------------------------------------------------------------------------------------------------------
 # Employee user form data view
 # ---------------------------------------------------------------------------------------------------------------------
-from .forms import EmpProf
 
 
-def get_empprof(request):
+@login_required
+def get_empprof(request, userid):
+    # print userid
         # if this is a POST request we need to process the form data
+    instance = get_object_or_None(Employee, pk = int(userid))
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = EmpProf(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
+
+
+    # create a form instance and populate it with data from the request:
+       form = EmpProf(request.POST, instance=instance)
+
+    # check whether it's valid:
+       if form.is_valid():
             data = form.save(commit=False)
             data.user = request.user
             data.save()
+
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
             return HttpResponseRedirect('/userprofile/myprofile/')
-
+       else:
+           print form.errors
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = EmpProf()
+        form = EmpProf(instance=instance)
 
-    return render(request, 'userprofile/userinfo.html', {'form': form})
+    return render(request, 'userprofile/userinfo.html', {'form': form}, context_instance=RequestContext(request))
 
+
+@login_required
 def myprofile(request):
-    return render_to_response('userprofile/myprofile.html')
+    user = request.user
+    user_profile = Employee.objects.filter(user = request.user)
+
+    return render_to_response('userprofile/myprofile.html', {'user_profile': user_profile})
+
+def editprofile(request):
+
+    return render_to_response('userprofile/userinfo.html')
