@@ -6,7 +6,10 @@ from django.contrib import admin
 
 from django.contrib import admin
 
-from .models import Choice, Question, IceCream, Comment, UserProfile
+from .models import*
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 # #by changing the place of class below we can decide what to keep first and what to keep next
 # class QuestionAdmin(admin.ModelAdmin):
@@ -45,8 +48,34 @@ class CommentAdmin(admin.ModelAdmin):
 # class UserProfileAdmin(admin.ModelAdmin):
 #     list_display = ['__unicode__','pub_date']
 
+class UserCreateForm(UserCreationForm):
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', )
+
+
+class UserAdmin(UserAdmin):
+    add_form = UserCreateForm
+    prepopulated_fields = {'username': ('first_name', 'last_name', )}
+
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('first_name', 'last_name', 'username', 'password1', 'password2', ),
+        }),
+    )
+
+# class EmpProf(EmpProf)
+# class EmployeeAdmin(admin.ModelAdmin):
+
+
+
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
 admin.site.register(IceCream)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(UserProfile)
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
+admin.site.register(Employee)

@@ -1,5 +1,5 @@
 {% extends "admintest/base.html" %}
-
+{% load staticfiles %}
 {#{% block main %}#}
 {#  <br>#}
 {#<br>#}
@@ -30,36 +30,57 @@
 
 
 {% block main %}
-  <br>
-<form class="form" action="/accounts/sign_up/" method="post">{% csrf_token %}
-    <h2 class="tab-group">Create your account </h2>
+<body style= "background:url({% static 'rEcScorE/images/speed9.jpg'%} ) no-repeat center center fixed" ></body>
 
-    <div class="top-row field-wrap">
-        <label> First name<span class="req">*</span></label><br><br>
+    <a href='/accounts/login/' target="_self">
+        <button style="position:relative" class="infos-button">login</button>
+        </a>
+
+<div class="top-row" >
+<form style="height: 550px;margin-top: -50px;" class="form" action="/accounts/sign_up/" method="post">{% csrf_token %}
+    <h2 class="tab-group top-row" style="text-align: center">Create your account </h2>
+<li style="display: inline">
+    <div style="float: left ;display:block" class="top-row field-wrap">
+        <label>First Name<span class="req">*</span></label><br><br>
         {{ form.first_name }}
+
+    </div>
 {#        lastname#}
-        <label>Last name<span class="req">*</span></label><br><br>
+    <div style="float: right; display:block" class="top-row field-wrap">
+        <label>Last Name<span class="req">*</span></label><br><br>
         {{ form.last_name }}
+    </div>
+     </li>
 {#        e-mail#}
+    <div style="float: left" class="top-row field-wrap">
          {{ form.email.errors }}
-        <label>E-mail<span class="req">*</span></label><br><br>
+        <label>E-Mail<span class="req">*</span></label><br><br>
         {{ form.email }}
+    </div>
 {#         username#}
+    <div style="float: right" class="top-row field-wrap">
         {{form.errors.values.0}}
         <label>Username<span class="req">*</span></label><br><br>
         {{ form.username }}
+    </div>
 {#        password#}
+    <div style="float: left" class="top-row field-wrap">
          {{form.errors.values.1}}
         <label>Password<span class="req">*</span></label><br><br>
         {{ form.password1 }}
+    </div>
 {#        password retype#}
+    <div style="float: right" class="top-row field-wrap">
          <label>Re-Type Password<span class="req">*</span></label><br><br>
         {{ form.password2 }}
     </div>
-     <br>
-    <input type="submit" name="submit" class="button button-block" value="Create account">
+    <br>
+    <div>
+    <input style="margin-top: 70px; float:left; margin-left: 32px" type="submit" name="submit" class="button button-block" value="Create account">
+    </div>
 </form>
 
+</div>
 {% endblock %}
 
 {#        <div id="login">#}
@@ -123,20 +144,21 @@
 {##}
 {#});#}
 {##}
-{#$('.tab a').on('click', function (e) {#}
-{##}
-{#  e.preventDefault();#}
-{##}
-{#  $(this).parent().addClass('active');#}
-{#  $(this).parent().siblings().removeClass('active');#}
-{##}
-{#  target = $(this).attr('href');#}
-{##}
-{#  $('.tab-content > div').not(target).hide();#}
-{##}
-{#  $(target).fadeIn(600);#}
-{##}
-{#});#}
-{##}
-{#</script>#}
+<script>
+
+    $('.tab a').on('click', function (e) {
+
+  e.preventDefault();
+
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+
+  target = $(this).attr('href');
+
+  $('.tab-content > div').not(target).hide();
+
+  $(target).fadeIn(600);
+
+
+</script>
 {#{% endblock %}#}

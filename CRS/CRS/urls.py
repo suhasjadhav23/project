@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^$', include('rEcScorE.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login', (admin.site.urls)),
+    # url(r'^userprofile/userinfo', (admin.site.urls)),
 
 
     # mike hibbert tutorial to make login and registraion test
@@ -18,6 +19,8 @@ urlpatterns = [
     url(r'^accounts/sign_up/', 'rEcScorE.views.register_user'),
     url(r'^accounts/register_success/$', 'rEcScorE.views.register_success'),
     url(r'^accounts/confirm/(?P<activation_key>\w+)/','rEcScorE.views.register_confirm'),
+    url(r'^userprofile/userinfo/$', 'rEcScorE.views.get_empprof'),
+    url(r'^userprofile/myprofile/$', 'rEcScorE.views.myprofile')
 
 ]
 

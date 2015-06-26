@@ -1,0 +1,71 @@
+{% extends "admintest/base.html" %}
+{% load staticfiles %}
+{% block main %}
+{#<body style= "background:url({% static 'rEcScorE/images/speed9.jpg'%} ) no-repeat center center fixed" ></body>#}
+{#    <br>#}
+
+{#  {% if form.errors %}#}
+{#    <p class="error">Sorry, that's not a valid Entry</p>#}
+{#  {% endif %}#}
+
+  <form  action="/userprofile/userinfo/" method="post">{% csrf_token %}
+
+    {% for field in form %}
+
+    {{ field.label }}
+    {{ field }}
+
+    {% endfor %}
+{#    <input type="submit" value="Submit" />#}
+{#</form>#}
+{#      <h2 class="tab-group top-row" style="text-align: center">Create your account </h2>#}
+{#<li style="display: inline">#}
+{#    <div style="float: left ;display:block" class="top-row field-wrap">#}
+{##}
+{#        test label#}
+{#----------------------------------------------------------------------------------------------------------        #}
+{#        <label for="your_name">Your name: </label>#}
+{#<input id="your_name" type="text" name="your_name" maxlength="100">#}
+{##}
+{#--------------------------------------------------------------------------------------------------------#}
+{#        <label>First Name<span class="req">*</span></label><br><br>#}
+{#        {{ form.your_name }}#}
+{##}
+{#    </div>#}
+{#        lastname#}
+{#    <div style="float: right; display:block" class="top-row field-wrap">#}
+{#        <label>Last Name<span class="req">*</span></label><br><br>#}
+{#        {{ form.last_name }}#}
+{#    </div>#}
+{#     </li>#}
+{#        e-mail#}
+{#    <div style="float: left" class="top-row field-wrap">#}
+{#         {{ form.email.errors }}#}
+{#        <label>E-Mail<span class="req">*</span></label><br><br>#}
+{#        {{ form.email }}#}
+{#    </div>#}
+{#         username#}
+{#    <div style="float: right" class="top-row field-wrap">#}
+{#        {{form.errors.values.0}}#}
+{#        <label>Username<span class="req">*</span></label><br><br>#}
+{#        {{ form.username }}#}
+{#    </div>#}
+{#        password#}
+{#    <div style="float: left" class="top-row field-wrap">#}
+{#         {{form.errors.values.1}}#}
+{#        <label>Password<span class="req">*</span></label><br><br>#}
+{#        {{ form.password1 }}#}
+{#    </div>#}
+{#        password retype#}
+{#    <div style="float: right" class="top-row field-wrap">#}
+{#         <label>Re-Type Password<span class="req">*</span></label><br><br>#}
+{#        {{ form.password2 }}#}
+{#    </div>#}
+{#    <br>#}
+{#    <div>#}
+    <input style="margin-top: 70px; float:left; margin-left: 32px" type="submit" name="submit" class="button button-block" value="$@Ve">
+{#    </div>#}
+
+  </form>
+
+{% endblock %}

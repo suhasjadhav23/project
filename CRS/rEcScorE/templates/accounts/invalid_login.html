@@ -1,12 +1,14 @@
 {% extends "admintest/base.html" %}
-
+{% load staticfiles %}
 {% block main %}
 <br>
 <br>
 <br>
 <br>
 <br>
-  <h2>Your login details are invalid!</h2>
-  <p>Click <a href="/accounts/login/">here</a> to login again.</p>
+    <body style= "background:url({% static 'rEcScorE/images/speed9.jpg'%} ) no-repeat center center fixed" ></body>
+
+    <h1 style="color: #ffffff">Your login details are invalid!</h1    >
+    <p style="text-align: center; color:lightseagreen; font-size: large">Click <a href="/accounts/login/" style="font-size: large;color: #ff0000;text-decoration: underline">here</a> to login again</p>
 
 {% endblock %}

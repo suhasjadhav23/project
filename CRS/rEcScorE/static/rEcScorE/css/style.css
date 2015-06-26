@@ -241,13 +241,13 @@ ul, .list.custom-list ul {
 .thumbnail .caption:hover {
 }
 .thumbnail .caption a {
-	font: 20px;
+	font:20px;
 }
 .slideUp {
 	top: -100px;
 }
 .navbar-inverse {
-  background:wheat;
+  background:#ffffff;
   margin: 0 auto;
   margin-top: -3.5px;
 }
@@ -366,7 +366,7 @@ i.fa.fa-star {
 }
 
   .form:hover{
-    border:1px solid #8BC3A3;
+    border:10px solid #8BC3A3;
   }
 
   .form:focus{
@@ -388,7 +388,7 @@ i.fa.fa-star {
     background:#0A5175;
     display: block;
     width:120px;
-    margin:10px 0 0px 0;
+    margin:-24px 0 0 0;
     border-radius:3px;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
@@ -575,7 +575,7 @@ color:white;
   transition: .3s;
 }
 .infos-button {
- color:black;
+ color:brown;
   margin-top: 24px;
    margin-left: 30px;
   font-size: 20px;
@@ -969,17 +969,17 @@ a:hover {
 
 .form {
   background: rgba(19, 35, 47, 0.9);
-  padding: 40px;
-  max-width: 600px;
-  margin: 40px auto;
+  padding: 30px;
+  max-width: 935px;
+  margin: -3px auto;
   border-radius: 4px;
-  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+  box-shadow: 0 4px 16px 48px rgba(19, 35, 47, 0.3);
 }
 
 .tab-group {
   list-style: none;
   padding: 0;
-  margin: 0 0 40px 0;
+  margin: -23px 8px 20px;
 }
 .tab-group:after {
   content: "";
@@ -1056,12 +1056,12 @@ label.highlight {
 input, textarea {
   font-size: 22px;
   display: block;
-  width: 100%;
+  width: 102%;
   height: 100%;
   padding: 5px 10px;
   background: none;
   background-image: none;
-  border: 1px solid #a0b3b0;
+  border: 3px solid #a0b3b0;
   color: #ffffff;
   border-radius: 0;
   -webkit-transition: border-color .25s ease, box-shadow .25s ease;
@@ -1079,7 +1079,10 @@ textarea {
 
 .field-wrap {
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 8px;
+  margin-top: 0px;
+  margin-left: 35px;
+  margin-right: 39px;
 }
 
 .top-row:after {
@@ -1097,8 +1100,9 @@ textarea {
 }
 
 .button {
-  border: 0;
-  outline: none;
+
+  border: 5px solid;
+  outline: medium none;
   border-radius: 0;
   padding: 15px 0;
   font-size: 2rem;
@@ -1117,7 +1121,7 @@ textarea {
 
 .button-block {
   display: block;
-  width: 100%;
+  width: 40%;
 }
 
 .forgot {

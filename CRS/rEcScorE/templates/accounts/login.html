@@ -1,21 +1,26 @@
 {% extends "admintest/base.html" %}
-
+{% load staticfiles %}
 {% block main %}
-<br>
+<body style= "background:url({% static 'rEcScorE/images/speed9.jpg'%} ) no-repeat center center fixed" ></body>
+    <br>
 
   {% if form.errors %}
     <p class="error">Sorry, that's not a valid username or password</p>
   {% endif %}
 
-  <form class="form" action="/accounts/auth/" method="post">{% csrf_token %}
-       <h2 class="tab-group" style="text-align: center">rEc$corE</h2>
-    <label class="field-wrap" for="username">User name:</label>
-    <input type="text" name="username" value="" id="username"><br><br>
-    <label class="field-wrap" for="password">Password:</label>
-    <input type="password" name="password" value="" id="password"><br>
-
-    <input type="submit" value="login"  class="button button-block"/>
-    
+  <form style="height: 420px;width:700px; margin-top:50px " class="form" action="/accounts/auth/" method="post">{% csrf_token %}
+    <h2 class="tab-group" style="text-align: center">rEc$corE</h2>
+    <div>
+     <label class="field-wrap" for="username"></label>
+    <input placeholder="Username :" type="text" name="username" value="" id="username"><br><br>
+    </div>
+      <div>
+      <label class="field-wrap" for="password"></label>
+    <input placeholder="Password :" type="password" name="password" value="" id="password"><br>
+</div>
+      <div>
+    <input style="margin-top: 38px; float:left; margin-left: 183px" type="submit" value="login"  class="button button-block"/>
+    </div>
   </form>
 
 {% endblock %}

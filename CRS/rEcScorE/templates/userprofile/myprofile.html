@@ -1,0 +1,22 @@
+{% extends "admintest/base.html" %}
+{% load staticfiles %}
+{% block main %}
+<br>
+<br>
+<br>
+<br>
+<br>
+{#    <body style= "background:url({% static 'rEcScorE/images/speed13.jpg'%} ) no-repeat center center fixed" ></body>#}
+    <h1 style="color: darkred"> Your Profile will be displayed here</h1>
+  <br><br><br><br><h3 style="text-align: center; color:lightseagreen">This page content will be available soon</h3>
+<table>
+{% for queue in queueList %}
+    {% for field, value in queue.get_fields %}
+        <tr>
+            <th>{{ field }}</th>
+            <td>{{ value }}</td>
+        </tr>
+    {% endfor %}
+{% endfor %}
+</table>
+{% endblock %}

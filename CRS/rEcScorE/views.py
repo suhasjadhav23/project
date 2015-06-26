@@ -45,7 +45,7 @@ class flowView(TemplateView):
 #
 #
 # def vote(request, question_id):
-#     model = Question
+# model = Question
 #     template_name = 'rEcScorE/flow.html'
 
 
@@ -152,7 +152,6 @@ def login(request):
 
 
 def auth_view(request):
-
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
 
@@ -160,13 +159,13 @@ def auth_view(request):
 
     if user is not None and (user.is_active is True):
         auth.login(request, user)
-        return HttpResponseRedirect('/accounts/loggedin')
+        return HttpResponseRedirect('/userprofile/userinfo')
     else:
         return HttpResponseRedirect('/accounts/invalid')
 
 
 def loggedin(request):
-    return render_to_response('accounts/loggedin.html',
+    return render_to_response('userprofile/userinfo.html',
                               {'full_name': request.user.username})
 
 
@@ -190,10 +189,12 @@ def register_user(request):
         args['form'] = form
         if form.is_valid():
             # form attributes saved to data then operation applied on data
+            # User.first_name.save()
             data = form.save(commit=False)
             data.save()  # save user to database if form is valid
             data.is_active = False
             data.save()
+
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
@@ -201,9 +202,10 @@ def register_user(request):
             key_expires = datetime.datetime.today() + datetime.timedelta(2)
 
             #Get user by username
-            user = User.objects.get(username=username)
+            user = User.objects.get(username=username, )
 
             # Create and save user profile
+
             new_profile = UserProfile(user=user, activation_key=activation_key, key_expires=key_expires)
             new_profile.save()
             # Send email with activation key
@@ -242,3 +244,33 @@ def register_confirm(request, activation_key):
         user.is_active = True
         user.save()
         return render_to_response('accounts/confirm.html')
+
+# --------------------------------------------------------------------------------------------------------------------
+# Employee user form data view
+# ---------------------------------------------------------------------------------------------------------------------
+from .forms import EmpProf
+
+
+def get_empprof(request):
+        # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = EmpProf(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = request.user
+            data.save()
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/userprofile/myprofile/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = EmpProf()
+
+    return render(request, 'userprofile/userinfo.html', {'form': form})
+
+def myprofile(request):
+    return render_to_response('userprofile/myprofile.html')
