@@ -14,6 +14,7 @@ from django.template import RequestContext, loader
 from .models import Choice, Question
 from annoying.functions import get_object_or_None
 
+
 class indexView(TemplateView):
     template_name = 'rEcScorE/index.html'
 
@@ -46,7 +47,7 @@ class flowView(TemplateView):
 #
 # def vote(request, question_id):
 # model = Question
-#     template_name = 'rEcScorE/flow.html'
+# template_name = 'rEcScorE/flow.html'
 
 
 # -------------------------------------------------------------------------------------------------------------------
@@ -143,7 +144,8 @@ from django.template import RequestContext
 from django.core.mail import send_mail
 import hashlib, datetime, random
 from django.utils import timezone
-from .forms import*
+from .forms import *
+
 
 def login(request):
     c = {}
@@ -160,7 +162,7 @@ def auth_view(request):
     if user is not None and (user.is_active is True):
         auth.login(request, user)
         userid = user.id
-        return HttpResponseRedirect('/userprofile/userinfo/%d'%userid)
+        return HttpResponseRedirect('/userprofile/userinfo/%d' % userid)
     else:
         return HttpResponseRedirect('/accounts/invalid')
 
@@ -210,9 +212,9 @@ def register_user(request):
             new_profile = UserProfile(user=user, activation_key=activation_key, key_expires=key_expires)
             new_profile.save()
             # Send email with activation key
-            email_subject = 'Account confirmation'
-            email_body = "Hey %s, thanks for signing up. To activate your account, click this link within \
-            48hours http://127.0.0.1:8000/accounts/confirm/%s" % (username, activation_key)
+            email_subject = 'rEcScorE Account confirmation'
+            email_body = "Hey %s, thanks for signing up. To activate your account, click this link within 48hours http://127.0.0.1:8000/accounts/confirm/%s" % (
+            username, activation_key)
 
             send_mail(email_subject, email_body, 'myemail@example.com',
                       [email], fail_silently=False)
@@ -246,6 +248,7 @@ def register_confirm(request, activation_key):
         user.save()
         return render_to_response('accounts/confirm.html')
 
+
 # --------------------------------------------------------------------------------------------------------------------
 # Employee user form data view
 # ---------------------------------------------------------------------------------------------------------------------
@@ -254,40 +257,68 @@ def register_confirm(request, activation_key):
 @login_required
 def get_empprof(request, userid):
     # print userid
-        # if this is a POST request we need to process the form data
-    instance = get_object_or_None(Employee, pk = int(userid))
+    # if this is a POST request we need to process the form data
+    # instance1 = get_object_or_None(Employee, pk=int(userid))
+    # form_inst = Employee.objects.get(user=request.user)
+    try:
+        instance = Employee.objects.get(user=request.user)
+    except Employee.DoesNotExist:
+        instance = None
+
     if request.method == 'POST':
-
-
-    # create a form instance and populate it with data from the request:
-       form = EmpProf(request.POST, instance=instance)
-
-    # check whether it's valid:
-       if form.is_valid():
+        # form_inst = Employee.objects.get(user=request.user)
+        form = EmpProf(request.POST or None, instance=instance)
+        if form.is_valid():
             data = form.save(commit=False)
+            # data.Profile_Pic = Employee(Profile_Pic=request.FILES['Profile_Pic'])
             data.user = request.user
             data.save()
-
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
             return HttpResponseRedirect('/userprofile/myprofile/')
-       else:
-           print form.errors
-    # if a GET (or any other method) we'll create a blank form
+
+        else:
+            print form.errors
     else:
+        # try:
+        #     form_inst = Employee.objects.get(user_id=request.user.id)
+        # except:
+        #     form_inst = User.objects.get(id=request.user.id)
+
         form = EmpProf(instance=instance)
 
     return render(request, 'userprofile/userinfo.html', {'form': form}, context_instance=RequestContext(request))
 
 
+# -------------------------------------------------------------------
+# testing m ike hibbert form
+# ---------------------------------------------------------------
+# def get_empprof(request,userid):
+#     if request.POST:
+#         form = EmpProf(request.POST, request.FILES)
+#         if form.is_valid():
+#             data = form.save(commit=False)
+#             data.user = request.user
+#             data.save()
+#
+#             return HttpResponseRedirect('/userprofile/myprofile/')
+#     else:
+#         form = EmpProf()
+#
+#     args = {}
+#     args.update(csrf(request))
+#
+#     args['form'] = form
+#
+#     return render_to_response('userprofile/userinfo.html', args)
+#
+
+
+
+
+
 @login_required
 def myprofile(request):
     user = request.user
-    user_profile = Employee.objects.filter(user = request.user)
+    user_profile = Employee.objects.get(user=request.user)
 
-    return render_to_response('userprofile/myprofile.html', {'user_profile': user_profile})
+    return render_to_response('userprofile/myprofile.html', {'user_profile': user_profile, 'user': user})
 
-def editprofile(request):
-
-    return render_to_response('userprofile/userinfo.html')

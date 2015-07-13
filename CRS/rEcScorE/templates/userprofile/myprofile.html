@@ -11,19 +11,27 @@
 
 {#    <body style= "background:url({% static 'rEcScorE/images/speed13.jpg'%} ) no-repeat center center fixed" ></body>#}
        <div class="row">
-        <div class="col s12 m6">
+        <div class="col s12 m6" style="width: 30%">
           <div class="card teal lightSpeedOut-1">
             <div class="card-content white-text">
 
-            <h1 style="color: darkred"> Your Profile will be displayed here</h1>
-               <h3 style="text-align: center; color:blue">This page content will be available soon</h3>
-                  <p>Click <a href="/userprofile/userinfo/{{ user.id }}/">here</a> to edit your profile information</p>
-                      {% for i in user_profile %}
-                      <span class="card-title">{{ i.your_name }}</span>
-                      {% endfor %}
+            <h3 style="color: darkred"> Your Profile Picture will be displayed here</h3>
+{#               <h3 style="text-align: center; color:blue">This page content will be available soon</h3>#}
+
+                        <span class="card-title" style="text: bold"><h3 style="color: #262626">{{ user_profile.your_name }}</h3></span>
+
+                          <h4>{{ user_profile.designation }}</h4>
+                          <h5>{{ user_profile.highest_degree  }}</h5>
+                          <h5>Date of Joining:  {{ user_profile.doj  }}</h5>
+                ConsultADD
+
+
+
+
             </div>
 {#            <div class="card-action">#}
-              <a href="/userprofile/editprofile/">This is a link</a>
+              <p style="color: black ;">Click <a style="color: orangered; text-decoration: underline" href="/userprofile/userinfo/{{ user.id }}/">here</a> to edit your profile information</p>
+
 {#              <a href="#">This is a link</a>#}
 {#            </div>#}
           </div>

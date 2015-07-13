@@ -3,8 +3,11 @@
 # test model
 import datetime
 from django.utils import timezone
-
+from time import time
 from django.db import models
+# from django.core.files.storage import FileSystemStorage
+from django.conf import settings
+from CRS import settings
 from gtk._gtk import widget_set_default_colormap
 
 
@@ -76,23 +79,34 @@ class UserProfile(models.Model):
         # employee information form model
         # -----------------------------------------------------------------------------------------------------
 
+# def get_upload_file_name(instance, filename):
+#     return settings.UPLOAD_FILE_PATTERN % (str(time()).replace('.', '_'), filename)
+
 
 class Employee(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True)
+    user = models.OneToOneField(User, null=True, blank=True)
     your_name = models.CharField(max_length=100, default=None)
-    dob = models.DateTimeField(blank=True, null=True)
+    dob = models.DateTimeField(blank=True, null=True, default=timezone.now())
     city = models.CharField(max_length=50, default=None)
     country = models.CharField(max_length=50, default=None)
     highest_degree = models.CharField(max_length=100, default=None)
-    doj = models.DateTimeField(blank=True, null=True)
+    doj = models.DateTimeField(blank=True, null=True, default=timezone.now())
     designation = models.CharField(max_length=100, default=None)
-    # NT_skill = models.CharField(max_length=500, default=None, widget=forms.Textarea)
+    Profile_Pic = models.ImageField(upload_to="img/documents/", null=True, blank=True)
+
+    # NT_skill = models.TextField(max_length=500, null=True, blank=True, default=None)
     # T_skill = models.CharField(max_length=500, default=None)
 
     def __unicode__(self):
         # return u'%s,%s,%s' % self.user.username, self.last_name, self.first_name
         return self.your_name
 
+    # def get_thumbnail(self):
+    #     thumb = str(self.thumbnail)
+    #     if not settings.DEBUG:
+    #         thumb = thumb.replace('rEcScorE/', '')
+    #
+    #     return thumb
 # -----------------------------------------------------------------------------------------------------
 # testing models forms
 # -----------------------------------------------------------------------------------------------------

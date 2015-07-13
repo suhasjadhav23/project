@@ -67,7 +67,6 @@ class RegistrationForm(UserCreationForm):
 
     #modify save() method so that we can set user.is_active to False when we first create our user
 
-
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
@@ -84,22 +83,11 @@ class RegistrationForm(UserCreationForm):
 # ------------------------------------------------------------------------------------------------------------------------------
 from models import *
 
-class EmpProf(forms.ModelForm):
-    # your_name = forms.CharField(label='Your name :', max_length=100)
-    # dob = forms.DateTimeField(label='Date Of Birth :')
-    # city = forms.CharField(label='City :', max_length=50)
-    # country = forms.CharField(label='Country :', max_length=50)
-    # highest_degree = forms.CharField(label='Qualification :', max_length=100)
-    # doj = forms.DateTimeField(label='Date Of Joining :')
-    # designation = forms.CharField(label='Designation/Role :', max_length=100)
-    # NT_skill = forms.CharField(label='Non-Technical Skills :', widget=forms.Textarea, max_length=500)
-    # T_skill = forms.CharField(label='Technical skills :', widget=forms.Textarea, max_length=500)
-    # file = forms.FileField(label='Upload your Profile Picture :')
 
+class EmpProf(forms.ModelForm):
     class Meta:
         model = Employee
-        #Employee = (Employee.objects.all().order_by('your_name', 'designation', 'highest_degree'))
-        fields = ('your_name', 'dob', 'city', 'country', 'highest_degree', 'doj', 'designation')
+        fields = ('your_name', 'dob', 'city', 'country', 'highest_degree', 'doj', 'designation', 'Profile_Pic')
 
         # def save(self, commit=True):
         #     employee = super(Employee, self).save(commit=False)

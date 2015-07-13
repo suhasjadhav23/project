@@ -20,9 +20,11 @@
 
   <div class="row">
         <div class="col s12 m6">
-          <div class="card blue darken-1">
-            <div class="card-content white-text ">
-                   <form  action="/userprofile/userinfo/{{ user.id }}/" method="post">{% csrf_token %}
+          <div class="card camera_white_skin">
+            <div class="card-content camera_brown_skin-text ">
+                <h1><a href="/accounts/logout">LOGOUT</a></h1>
+
+                <form action="/userprofile/userinfo/{{ user.id }}/" method="post" >{% csrf_token %}
 
                    {% for field in form %}
 
@@ -30,10 +32,10 @@
                    {{ field }}
 
                    {% endfor %}
-                   <input style="margin-top: 70px; float:left; margin-left: 32px" type="submit" name="submit" class="button button-block" value="$@Ve">
+                   <input style="margin-top: 70px; float:left; margin-left: 32px" type="submit" name="submit" class="button button-block" value="$ave">
                    </form>
             </div>
-{#        </div>
+        </div>
         </div>
       </div>
 {#    <input type="submit" value="Submit" />#}
