@@ -1,92 +1,90 @@
 {% extends "admintest/base.html" %}
 {% load staticfiles %}
 {% block main %}
-{#<body style= "background:url({% static 'rEcScorE/images/speed9.jpg'%} ) no-repeat center center fixed" ></body>#}
-{#    <br>#}
+    {#<body style= "background:url({% static 'rEcScorE/images/speed9.jpg'%} ) no-repeat center center fixed" ></body>#}
+    {#    <br>#}
 
-{#  {% if form.errors %}#}
-{#    <p class="error">Sorry, that's not a valid Entry</p>#}
-{#  {% endif %}#}
+    {#  {% if form.errors %}#}
+    {#    <p class="error">Sorry, that's not a valid Entry</p>#}
+    {#  {% endif %}#}
 
-<head>
- <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <head>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-</head>
-
-
-
-  <div class="row">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    </head>
+    <div class="row">
         <div class="col s12 m6">
-          <div class="card camera_white_skin">
-            <div class="card-content camera_brown_skin-text ">
-                <h1><a href="/accounts/logout">LOGOUT</a></h1>
+            <div class="card camera_white_skin">
+                <div class="card-content camera_brown_skin-text ">
+                    {#                <h1><a href="/accounts/logout">LOGOUT</a></h1>#}
 
-                <form action="/userprofile/userinfo/{{ user.id }}/" method="post" >{% csrf_token %}
+                    <form action="/userprofile/userinfo/{{ user.id }}/" method="post">{% csrf_token %}
 
-                   {% for field in form %}
+                        {% for field in form %}
 
-                   {{ field.label }}
-                   {{ field }}
+                            <h6 style="color:black;">{{ field.label }} : </h6>
+                            {{ field }}
 
-                   {% endfor %}
-                   <input style="margin-top: 70px; float:left; margin-left: 32px" type="submit" name="submit" class="button button-block" value="$ave">
-                   </form>
+                        {% endfor %}
+                        <input style="margin-top: 70px; float:left; margin-left: 32px" type="submit" name="submit"
+                               class="button button-block" value="$ave">
+                    </form>
+                </div>
             </div>
         </div>
-        </div>
-      </div>
-{#    <input type="submit" value="Submit" />#}
-{#</form>#}
-{#      <h2 class="tab-group top-row" style="text-align: center">Create your account </h2>#}
-{#<li style="display: inline">#}
-{#    <div style="float: left ;display:block" class="top-row field-wrap">#}
-{##}
-{#        test label#}
-{#----------------------------------------------------------------------------------------------------------        #}
-{#        <label for="your_name">Your name: </label>#}
-{#<input id="your_name" type="text" name="your_name" maxlength="100">#}
-{##}
-{#--------------------------------------------------------------------------------------------------------#}
-{#        <label>First Name<span class="req">*</span></label><br><br>#}
-{#        {{ form.your_name }}#}
-{##}
-{#    </div>#}
-{#        lastname#}
-{#    <div style="float: right; display:block" class="top-row field-wrap">#}
-{#        <label>Last Name<span class="req">*</span></label><br><br>#}
-{#        {{ form.last_name }}#}
-{#    </div>#}
-{#     </li>#}
-{#        e-mail#}
-{#    <div style="float: left" class="top-row field-wrap">#}
-{#         {{ form.email.errors }}#}
-{#        <label>E-Mail<span class="req">*</span></label><br><br>#}
-{#        {{ form.email }}#}
-{#    </div>#}
-{#         username#}
-{#    <div style="float: right" class="top-row field-wrap">#}
-{#        {{form.errors.values.0}}#}
-{#        <label>Username<span class="req">*</span></label><br><br>#}
-{#        {{ form.username }}#}
-{#    </div>#}
-{#        password#}
-{#    <div style="float: left" class="top-row field-wrap">#}
-{#         {{form.errors.values.1}}#}
-{#        <label>Password<span class="req">*</span></label><br><br>#}
-{#        {{ form.password1 }}#}
-{#    </div>#}
-{#        password retype#}
-{#    <div style="float: right" class="top-row field-wrap">#}
-{#         <label>Re-Type Password<span class="req">*</span></label><br><br>#}
-{#        {{ form.password2 }}#}
-{#    </div>#}
-{#    <br>#}
-{#    <div>#}
+    </div>
+    {#    <input type="submit" value="Submit" />#}
+    {#</form>#}
+    {#      <h2 class="tab-group top-row" style="text-align: center">Create your account </h2>#}
+    {#<li style="display: inline">#}
+    {#    <div style="float: left ;display:block" class="top-row field-wrap">#}
+    {##}
+    {#        test label#}
+    {#----------------------------------------------------------------------------------------------------------        #}
+    {#        <label for="your_name">Your name: </label>#}
+    {#<input id="your_name" type="text" name="your_name" maxlength="100">#}
+    {##}
+    {#--------------------------------------------------------------------------------------------------------#}
+    {#        <label>First Name<span class="req">*</span></label><br><br>#}
+    {#        {{ form.your_name }}#}
+    {##}
+    {#    </div>#}
+    {#        lastname#}
+    {#    <div style="float: right; display:block" class="top-row field-wrap">#}
+    {#        <label>Last Name<span class="req">*</span></label><br><br>#}
+    {#        {{ form.last_name }}#}
+    {#    </div>#}
+    {#     </li>#}
+    {#        e-mail#}
+    {#    <div style="float: left" class="top-row field-wrap">#}
+    {#         {{ form.email.errors }}#}
+    {#        <label>E-Mail<span class="req">*</span></label><br><br>#}
+    {#        {{ form.email }}#}
+    {#    </div>#}
+    {#         username#}
+    {#    <div style="float: right" class="top-row field-wrap">#}
+    {#        {{form.errors.values.0}}#}
+    {#        <label>Username<span class="req">*</span></label><br><br>#}
+    {#        {{ form.username }}#}
+    {#    </div>#}
+    {#        password#}
+    {#    <div style="float: left" class="top-row field-wrap">#}
+    {#         {{form.errors.values.1}}#}
+    {#        <label>Password<span class="req">*</span></label><br><br>#}
+    {#        {{ form.password1 }}#}
+    {#    </div>#}
+    {#        password retype#}
+    {#    <div style="float: right" class="top-row field-wrap">#}
+    {#         <label>Re-Type Password<span class="req">*</span></label><br><br>#}
+    {#        {{ form.password2 }}#}
+    {#    </div>#}
+    {#    <br>#}
+    {#    <div>#}
 
-{#    </div>#}
+    {#    </div>#}
 
 
 

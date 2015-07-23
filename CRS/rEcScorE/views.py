@@ -11,7 +11,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-from .models import Choice, Question
+# from .models import Choice, Question
 from annoying.functions import get_object_or_None
 
 
@@ -267,7 +267,7 @@ def get_empprof(request, userid):
 
     if request.method == 'POST':
         # form_inst = Employee.objects.get(user=request.user)
-        form = EmpProf(request.POST or None, instance=instance)
+        form = EmpProf(request.POST or None, request.FILES,instance=instance)
         if form.is_valid():
             data = form.save(commit=False)
             # data.Profile_Pic = Employee(Profile_Pic=request.FILES['Profile_Pic'])
@@ -319,6 +319,83 @@ def get_empprof(request, userid):
 def myprofile(request):
     user = request.user
     user_profile = Employee.objects.get(user=request.user)
+    mycomment = Comment.objects.all().order_by('-pub_date')
+    # mycomment = CommentForm.objects.get(user=request.user)
 
-    return render_to_response('userprofile/myprofile.html', {'user_profile': user_profile, 'user': user})
+    return render_to_response('userprofile/myprofile.html', {'user_profile': user_profile,'mycomment': mycomment, 'user': user})
 
+# Add comment by logged in user
+# def add_comment(request, user_id):
+#
+#     if request.method == "POST":
+#         f = CommentForm(request.POST)
+#         if f.is_valid():
+#             c = f.save(commit=False)
+#             c.pub_date = timezone.now()
+#             c.save()
+#
+#             # messages.success(request, "You Comment was added")
+#
+#             return HttpResponseRedirect('/userprofile/myprofile/')
+#
+#     else:
+#         f = CommentForm()
+#
+#     args = {}
+#     args.update(csrf(request))
+#
+#     args['form'] = f
+#
+#     return render_to_response('userprofile/addcomment.html',{'form': f}, context_instance=RequestContext(request))
+
+def add_comment(request):
+    print "/////////////////"
+    # print userid
+    # if this is a POST request we need to process the form data
+    # instance1 = get_object_or_None(Employee, pk=int(userid))
+    # form_inst = Employee.objects.get(user=request.user)
+    # try:
+    #     instance = Comment.objects.get(user=request.user)
+    # except Comment.DoesNotExist:
+    #     instance = None
+
+    if request.method == 'POST':
+        # form_inst = Employee.objects.get(user=request.user)
+        form = CommentForm(request.POST or None, request.FILES, )
+        if form.is_valid():
+            data = form.save(commit=False)
+            # data.Profile_Pic = Employee(Profile_Pic=request.FILES['Profile_Pic'])
+            data.user = request.user
+            print data
+            data.save()
+            print data
+            print "*******"
+
+            return HttpResponseRedirect('/userprofile/myprofile/')
+
+
+        else:
+            print form.errors
+    else:
+        # try:
+        #     form_inst = Employee.objects.get(user_id=request.user.id)
+        # except:
+        #     form_inst = User.objects.get(id=request.user.id)
+
+        form = CommentForm()
+
+    return render(request, 'userprofile/addcomment.html', {'form': form}, context_instance=RequestContext(request))
+
+# @login_required
+# def comment(request):
+#     user = request.user
+#     mycomment = Comment.objects.all()
+#
+#     return render_to_response('userprofile/myprofile.html', {'mycomment': mycomment, 'user': user})
+# @login_required
+# def myprofile(request):
+#     user = request.user
+#     user_profile = Employee.objects.get(user=request.user)
+#     mycomment = CommentForm.objects.get(user=request.user)
+#
+#     return render_to_response('userprofile/myprofile.html', {'user_profile': user_profile, 'mycomment': mycomment, 'user': user})

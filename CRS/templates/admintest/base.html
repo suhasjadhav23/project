@@ -86,8 +86,13 @@
 </head>
 <body>
 <div class="navbar navbar-inverse">
-     <a href="http://127.0.0.1:8000/admin/" target="_blank"><img src="{% static 'rEcScorE/images/consultadd.png'%}" width="300" padding="50" align="center"></a>
+     <a href="http://127.0.0.1:8000/admin/" target="_blank"><img src="{% static 'rEcScorE/images/consultadd.png'%}" width="300" padding="50" align="center">{% if user.is_authenticated %}<h6 style="float: right; margin-top:60px "><a href="/accounts/logout">LOGOUT</a>
+     {% block link %}
+{#         ::<a href="/userprofile/comment">COMMENT</a>#}
+     {% endblock %}
+     </h6>{% endif %}</a>
 {#      <a href="" style="align-content:r">aDmiN</a>#}
+
 </div>
 
 {% block main %}

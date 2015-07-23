@@ -8,7 +8,7 @@ var blue = [196, 77, 55];
 var purple = [280, 50, 60];
 
 var myName = "rEc$corE";
-letterColors = [red, black, blue,orange  ]
+letterColors = [red, black,purple,green  ]
 
 
 //if(15 > 3) {

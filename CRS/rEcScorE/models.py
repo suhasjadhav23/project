@@ -5,62 +5,61 @@ import datetime
 from django.utils import timezone
 from time import time
 from django.db import models
+from django.contrib.auth.models import User
+
 # from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from CRS import settings
 from gtk._gtk import widget_set_default_colormap
 
 
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-
-    # this is added to notify that what is created recently, a filter is used in admin.py so as to differentiate as per the date published for the object 'Question'
-    def was_published_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_date <= now
-
-
-def __unicode__(self):  # __unicode__ on Python 2
-    return self.question_text
-
-
-class Choice(models.Model):
-    question = models.ForeignKey(Question)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
-
-    def __unicode__(self):  # __unicode__ on Python 2
-        return self.choice_text
-
-
-STATUS_CHOICES = enumerate(("solid", "squishy", "liquid"))
-
-
-class IceCream(models.Model):
-    flavor = models.CharField(max_length=50)
-    status = models.IntegerField(choices=STATUS_CHOICES)
-
-    def __unicode__(self):  # __unicode__ on Python 2
-        return self.flavor
+# class Question(models.Model):
+#     question_text = models.CharField(max_length=200)
+#     pub_date = models.DateTimeField('date published')
+#
+#     # this is added to notify that what is created recently, a filter is used in admin.py so as to differentiate as per the date published for the object 'Question'
+#     def was_published_recently(self):
+#         now = timezone.now()
+#         return now - datetime.timedelta(days=1) <= self.pub_date <= now
+#
+#
+# def __unicode__(self):  # __unicode__ on Python 2
+#     return self.question_text
+#
+#
+# class Choice(models.Model):
+#     question = models.ForeignKey(Question)
+#     choice_text = models.CharField(max_length=200)
+#     votes = models.IntegerField(default=0)
+#
+#     def __unicode__(self):  # __unicode__ on Python 2
+#         return self.choice_text
+#
+#
+# STATUS_CHOICES = enumerate(("solid", "squishy", "liquid"))
+#
+#
+# class IceCream(models.Model):
+#     flavor = models.CharField(max_length=50)
+#     status = models.IntegerField(choices=STATUS_CHOICES)
+#
+#     def __unicode__(self):  # __unicode__ on Python 2
+#         return self.flavor
 
 
 # Comment model
 
 class Comment(models.Model):
-    first_name = models.CharField(max_length=200)
-    second_name = models.CharField(max_length=200)
+    user = models.ForeignKey(User, null=True, blank=True)
+    # employee = user.username()
     body = models.TextField()
-    pub_date = models.DateTimeField('date published')
+    pub_date = models.DateTimeField(auto_now_add=True)
 
 
     def __unicode__(self):  # __unicode__ on Python 2
-        return self.first_name
+        return self.user.username + " "+ self.body
 
         # userprofile model
-
-
-from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
@@ -70,7 +69,7 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         # return u'%s,%s,%s' % self.user.username, self.last_name, self.first_name
-        return self.user.username
+        return self.user.first_name
 
     class Meta:
         verbose_name_plural = u'User profiles'

@@ -1,42 +1,80 @@
 {% extends "admintest/base.html" %}
 {% load staticfiles %}
+
+{% block link %}
+         ::<a href="/userprofile/comment">COMMENT</a>
+     {% endblock %}
+
+
 {% block main %}
-<head>
- <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <head>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-</head>
-
-{#    <body style= "background:url({% static 'rEcScorE/images/speed13.jpg'%} ) no-repeat center center fixed" ></body>#}
-       <div class="row">
-        <div class="col s12 m6" style="width: 30%">
-          <div class="card teal lightSpeedOut-1">
-            <div class="card-content white-text">
-
-            <h3 style="color: darkred"> Your Profile Picture will be displayed here</h3>
-{#               <h3 style="text-align: center; color:blue">This page content will be available soon</h3>#}
-
-                        <span class="card-title" style="text: bold"><h3 style="color: #262626">{{ user_profile.your_name }}</h3></span>
-
-                          <h4>{{ user_profile.designation }}</h4>
-                          <h5>{{ user_profile.highest_degree  }}</h5>
-                          <h5>Date of Joining:  {{ user_profile.doj  }}</h5>
-                ConsultADD
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    </head>
+{#    <h6><a href="/accounts/logout">LOGOUT</a></h6>#}
+{#    <h6><a href="/userprofile/comment">Add comment</a></h6>#}
 
 
+    {#    <body style= "background:url({% static 'rEcScorE/images/speed13.jpg'%} ) no-repeat center center fixed" ></body>#}
+    <div class="row">
+        <div class="col s4 m3" style="width: 30%; margin-top: 15px">
+            <div class="card White lightSpeedOut-1">
+                <div class="card-content white-text">
 
+                    <h3 style="color: darkred"> Your Profile Picture will be displayed here</h3>
+                    {#               <h3 style="text-align: center; color:blue">This page content will be available soon</h3>#}
+
+                    <span class="card-title" style="text: bold"><h3
+                            style="color: #262626">{{ user_profile.your_name }}</h3></span>
+
+                    <h4 style="color: #080808">{{ user_profile.designation }}</h4>
+                    <h5 style="color: #080808">{{ user_profile.highest_degree }}</h5>
+                    <h5 style="color: #080808">Date of Joining: {{ user_profile.doj }}</h5>
+                    ConsultADD
+
+
+                </div>
+                {#            <div class="card-action">#}
+                <p style="color: black ;">Click <a style="color: orangered; text-decoration: underline"
+                                                   href="/userprofile/userinfo/{{ user.id }}/">here</a> to edit your profile information</p>
 
             </div>
-{#            <div class="card-action">#}
-              <p style="color: black ;">Click <a style="color: orangered; text-decoration: underline" href="/userprofile/userinfo/{{ user.id }}/">here</a> to edit your profile information</p>
-
-{#              <a href="#">This is a link</a>#}
-{#            </div>#}
-          </div>
         </div>
-      </div>
+     <div class="col s8 m5" style="margin-top: 15px" >
+            <div class="card white lightSpeedOut-1"  style="overflow: scroll; height: 500px;">
+                <div class="card-content white-text">
+
+                    <div><h3 style="color: darkred; position: fixed"> Comment History</h3></div><br><br><br>
+
+                    <h3 style="text-align: center; color:blue" ></h3>
+
+{#                    <span class="card-title" style="text: bold; font-size: 50px" ><h3 style="color: #262626">{{ co }}</h3></span>#}
+
+
+                     {% for com in mycomment %}
+                        <h6 style="color:darkred">{{ com.user.first_name }}</h6>
+{#                    <div class="container">#}
+                         <div class="dialogbox">
+                            <div class="body">
+                                <span class="tip tip-up"></span>
+
+                                <div class="message">
+                                    {{ com.body }}<br>
+                                    {{ com.pub_date }}
+                                </div>
+                            <div>
+                         </div>
+                 </div>
+             </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+    </div>
 
 
 {% endblock %}

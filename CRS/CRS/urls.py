@@ -22,6 +22,9 @@ urlpatterns = [
     url(r'^userprofile/userinfo/(?P<userid>\d+)/$', 'rEcScorE.views.get_empprof'),
     # url(r'^userprofile/userinfo/(?P<userid>\d+)/$', 'rEcScorE.views.get_empprof'),
     url(r'^userprofile/myprofile/$', 'rEcScorE.views.myprofile'),
+    url(r'^userprofile/comment/$', 'rEcScorE.views.add_comment'),
+    # url(r'^userprofile/comments/$', 'rEcScorE.views.comment'),
+
 
 
 
