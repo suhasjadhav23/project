@@ -1,0 +1,266 @@
+{% extends "admintest/base.html" %}
+{% load staticfiles %}
+
+{% block link %}
+    ::<a href="/userprofile/comment">COMMENT</a>
+    ::<a href="/userprofile/myprofile">My Profile</a>
+{% endblock %}
+
+ 
+{% block main %}
+    <head>
+        <!-- Compiled and minified CSS -->
+        {#        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">#}
+        <link rel="stylesheet" href="{% static 'rEcScorE/css/materialize.min.css' %}">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    </head>
+    {#    <h6><a href="/accounts/logout">LOGOUT</a></h6>#}
+    {#    <h6><a href="/userprofile/comment">Add comment</a></h6>#}
+
+
+    {#    <body style= "background:url({% static 'rEcScorE/images/speed13.jpg'%} ) no-repeat center center fixed" ></body>#}
+
+{#form to add new screened <candidates></candidates>#}
+
+    <ul class="collapsible" data-collapsible="accordion">
+        <li>
+            <div class=" row collapsible-header" style="color: darkred;height: 60px "><h5>Add Candidate :</h5></div>
+            <div class="collapsible-body">
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="card camera_white_skin">
+                            <div class="card-content camera_brown_skin-text ">
+                                {#                <h1><a href="/accounts/logout">LOGOUT</a></h1>#}
+
+                                <form action="/userprofile/workspace/" method="post">{% csrf_token %}
+
+                                    {% for field in form %}
+
+
+                                        <div class="col s12 m4">
+                                            <h6 style="color:black;">{{ field.label }} : </h6>
+                                            {{ field }}
+                                        </div>
+                                    {% endfor %}
+                                    <input style="margin-top: 6px; float:left; margin-left: 32px; margin-bottom: 6px; width: 100px"
+                                           type="submit"
+                                           name="submit"
+                                           class="infos-buttonn" value="$ave">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+  {#Table for first round/first creeenig results candidates#}
+
+    <ul class="collapsible " data-collapsible="accordion">
+        <li>
+            <div class=" row  collapsible-header" style="color: darkred;height: 60px "><h5>Candidate$ $creeening $tatus - I :</h5></div>
+            <div class="collapsible-body">
+                <div class="row " style="height: 550px">
+                    <div class="col s12 m12">
+                        <div class="card  camera_white_skin darken-1">
+                            <div class="card-content black-text">
+                                <table>
+                                    {#                <thead>#}
+                                    <tr style="font-size:15px;font-family:Courier New, courier, monospace; text-align: center; color:#000000">
+                                        <th>Date</th>
+                                        <th>Name</th>
+                                        <th>Job<br>Title</th>
+                                        <th>Experience</th>
+                                        <th>Degree</th>
+                                        <th>City</th>
+                                        <th>Country</th>
+                                        <th>Source</th>
+                                        <th>E-Mail ID</th>
+                                        <th>Contact</th>
+                                        <th>Screened <br>By</th>
+                                        <th>$corE<br>[1]</th>
+                                        <th>$tatu$</th>
+                                        <th>Round<br>[2]</th>
+
+                                    </tr>
+                                    {#                </thead>#}
+                                    {% for item in candidatee %}
+                                        {#                        <thead>#}
+                                        <tr style="color: #0059bc">
+                                            <td>{{ item.pub_date }}</td>
+                                            <td>{{ item.candidate_name }}</td>
+                                            <td>{{ item.job_title }}</td>
+                                            <td>{{ item.experience }}</td>
+                                            <td>{{ item.highest_degree }}</td>
+                                            <td>{{ item.city }}</td>
+                                            <td>{{ item.country }}</td>
+                                            <td>{{ item.source }}</td>
+                                            <td>{{ item.email }}</td>
+                                            <td>{{ item.contact_number }}</td>
+                                            <td>{{ item.user.username }}
+                                            <td>{{ item.screening_score_1 }}</td>
+                                            <td>{{ item.status_1 }}</td>
+                                            <td>{{ item.scheduled_with }}</td>
+
+                                        </tr>
+                                        {#                       </thead>#}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">Got to profile</a>
+                                {#              <a href="#">This is a link</a>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </li>
+    </ul>
+
+
+
+   {#    table for second screening candidates#}
+
+<ul class="collapsible " data-collapsible="accordion">
+        <li>
+            <div class=" row collapsible-header" style="color: darkred;height: 60px "><h5>$creeening $tatus - II :</h5></div>
+            <div class="collapsible-body">
+                <div class="row " style="height: 550px">
+                    <div class="col s12 m12">
+                        <div class="card  camera_white_skin darken-1">
+                            <div class="card-content black-text">
+                                <table>
+                                    {#                <thead>#}
+                                    <tr style="font-size:15px;font-family:Courier New, courier, monospace; text-align: center; color:#000000">
+                                        <th>Name</th>
+{#                                        <th>Job Title</th>#}
+{#                                        <th>Experience</th>#}
+{#                                        <th>Degree</th>#}
+{#                                        <th>City</th>#}
+{#                                        <th>Country</th>#}
+{#                                        <th>Source</th>#}
+                                        <th>E-Mail ID</th>
+                                        <th>Contact</th>
+                                        <th>$corE<br>[1]</th>
+                                        <th>Round<br>[1]</th>
+                                        <th>$corE<br>[2]</th>
+                                        <th>$tatu$<br>[2]</th>
+                                        <th>Final <br>Round</th>
+
+
+                                    </tr>
+                                    {#                </thead>#}
+                                    {% for item in candidatee %}
+                                        {#                        <thead>#}
+                                        {% if item.status_1 == 'S' %}
+                                        <tr style="color: #0059bc">
+                                            <td>{{ item.candidate_name }}</td>
+{#                                            <td>{{ item.job_title }}</td>#}
+{#                                            <td>{{ item.experience }}</td>#}
+{#                                            <td>{{ item.highest_degree }}</td>#}
+{#                                            <td>{{ item.city }}</td>#}
+{#                                            <td>{{ item.country }}</td>#}
+{#                                            <td>{{ item.source }}</td>#}
+                                            <td>{{ item.email }}</td>
+                                            <td>{{ item.contact_number }}</td>
+                                            <td>{{ item.screening_score_1 }}</td>
+                                            <td>{{ item.scheduled_with }}</td>
+                                            <td>{{ item.screening_score_2 }}</td>
+                                            <td>{{ item.status_2 }}</td>
+                                            <td>{{ item.final_schedule }}</td>
+
+                                        </tr>
+                                        {% endif %}
+                                        {#                       </thead>#}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">Got to profile</a>
+                                {#              <a href="#">This is a link</a>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </li>
+    </ul>
+
+
+    {#table for 3rd round screening candidates#}
+<ul class="collapsible " data-collapsible="accordion">
+        <li>
+            <div class=" row collapsible-header" style="color: darkred;height: 60px "><h5>Final $tatus :</h5></div>
+            <div class="collapsible-body">
+                <div class="row " style="height: 550px">
+                    <div class="col s12 m12">
+                        <div class="card  camera_white_skin darken-1">
+                            <div class="card-content black-text">
+                                <table>
+                                    {#                <thead>#}
+                                    <tr style="font-size:15px;font-family:Courier New, courier, monospace; text-align: center; color:#000000">
+                                        <th>Name</th>
+{#                                        <th>Job Title</th>#}
+{#                                        <th>Experience</th>#}
+{#                                        <th>Degree</th>#}
+{#                                        <th>City</th>#}
+{#                                        <th>Country</th>#}
+{#                                        <th>Source</th>#}
+                                        <th>E-Mail ID</th>
+                                        <th>Contact</th>
+                                        <th>$corE<br>[1]</th>
+                                        <th>Round<br>[1]</th>
+                                        <th>$corE<br>[2]</th>
+                                        <th>$tatu$<br>[2]</th>
+                                        <th>Final<br>Round</th>
+                                        <th>$corE<br>[3]</th>
+                                        <th>$tatu$<br>[3]</th>
+                                        <th>Final<br> $corE</th>
+
+                                    </tr>
+                                    {#                </thead>#}
+                                    {% for item in candidatee %}
+                                        {#                        <thead>#}
+                                        {% if item.status_2 == 'S' %}
+                                        <tr style="color: #0059bc">
+                                            <td>{{ item.candidate_name }}</td>
+{#                                            <td>{{ item.job_title }}</td>#}
+{#                                            <td>{{ item.experience }}</td>#}
+{#                                            <td>{{ item.highest_degree }}</td>#}
+{#                                            <td>{{ item.city }}</td>#}
+{#                                            <td>{{ item.country }}</td>#}
+{#                                            <td>{{ item.source }}</td>#}
+                                            <td>{{ item.email }}</td>
+                                            <td>{{ item.contact_number }}</td>
+                                            <td>{{ item.screening_score_1 }}</td>
+                                            <td>{{ item.scheduled_with }}</td>
+                                            <td>{{ item.screening_score_2 }}</td>
+                                            <td>{{ item.status_2 }}</td>
+                                            <td>{{ item.final_schedule }}</td>
+                                            <td>{{ item.screening_score_3 }}</td>
+                                            <td>{{ item.status_3 }}</td>
+                                            <td>{{ item.final_score }}</td>
+
+                                        </tr>
+                                        {% endif %}
+                                        {#                       </thead>#}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">Got to profile</a>
+                                {#              <a href="#">This is a link</a>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </li>
+    </ul>
+{% endblock %}
